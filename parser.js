@@ -15,5 +15,6 @@ const newPosts = async () => {
     }
 }
 
-newPosts()
-// addNewPost('10-must-cop-sneaker-releases-launching-in-2024')
+// newPosts()
+addNewPost('supreme-x-mm6-maison-margiela-is-officially-confirmed')
+// getAllPostUrl()
