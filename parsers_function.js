@@ -87,7 +87,7 @@ export const getAllPostUrl = async () => {
     console.log(numberPages)
     await browser.close();
 
-    for (let pageNum = 1; pageNum <= 1; pageNum++) {
+    for (let pageNum = 1; pageNum <= 2; pageNum++) {
         const browser = await puppeteer.launch({
             headless: false,
         });
@@ -123,27 +123,38 @@ export const  addNewPost = async (postDonorSlug) => {
 
     const title = await getPageTitle(page);
     const content = await getMeinInf(page);
+    const characterCount = content.length;
 
-    const answer = await sendMessage(title, content);
-    // const imgId = await createImg(title)
+    if (characterCount < 1500) {
+        console.log('title: ' + title);
+        console.log('character count: ', characterCount);
+        console.log('Skipping...');
+    } else {
 
-    // let answer;
-    // try {
-    //     answer = await sendMessage(title, content, language);
-    // } catch (error) {
-    //     console.error("Помилка під час відправки повідомлення:", error);
-    //     await browser.close();
-    //     return;
-    // }
+        // const answer = await sendMessage(title, content);
+        // const imgId = await createImg(title)
 
-    //await createPost(answer.title, answer.content, postDonorSlug, imgId);
+        // let answer;
+        // try {
+        //     answer = await sendMessage(title, content, language);
+        // } catch (error) {
+        //     console.error("Помилка під час відправки повідомлення:", error);
+        //     await browser.close();
+        //     return;
+        // }
 
-    await browser.close();
+        //await createPost(answer.title, answer.content, postDonorSlug, imgId);
 
-    console.log('title' + title);
-    console.log('content' + content);
-    console.log('-----------------');
-    console.log('answer ' + answer);
+        await browser.close();
+
+        console.log('title: ' + title);
+        console.log('character count: ', characterCount);
+        // console.log('content: ' + content);
+        // console.log('-----------------');
+        // console.log('answer ' + answer);
+        console.log('Adding...');
+    }
+
     return 1;
 };
 
