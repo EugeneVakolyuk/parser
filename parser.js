@@ -15,4 +15,4 @@ const newPosts = async () => {
     }
 }
 // newPosts()
-addNewPost('the-history-of-goyard')
+addNewPost('10-must-cop-sneaker-releases-launching-in-2024')

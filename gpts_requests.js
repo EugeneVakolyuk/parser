@@ -36,23 +36,23 @@ export const openaiChat = async (title, mainInf, language) => {
     }
 };
 
-export const sendMessage = async (title, content, language) => {
+export const sendMessage = async (title, content) => {
 
     const openai = new OpenAI({
         apiKey: process.env.OPENAI_API_KEY
     })
 
-    const postParaphraser = await openai.beta.assistants.retrieve("asst_Tju2VX9OkfhmrV5KKVzL0HsG");
+    const shoesParser  = await openai.beta.assistants.retrieve("asst_nXKEyVABYlZRiXv2A1PsSRUv");
 
     const thread = await openai.beta.threads.create()
 
     const message = await openai.beta.threads.messages.create(thread.id, {
         role: "user",
-        content: `${title} ${content} ${language}`,
+        content: `${title} ${content}`,
     });
 
     const run = await openai.beta.threads.runs.create(thread.id, {
-        assistant_id: postParaphraser.id,
+        assistant_id: shoesParser.id,
     });
 
     do {
@@ -67,7 +67,7 @@ export const sendMessage = async (title, content, language) => {
         const assistantMessages = messages.data.filter((msg) => {
             return msg.role === "assistant";
         });
-
-        return JSON.parse(assistantMessages[0].content[0].text.value)
+        console.log(assistantMessages[0].content[0].text.value)
+        return assistantMessages[0].content[0].text.value
     } while (true);
 }

@@ -110,7 +110,7 @@ export const getAllPostUrl = async () => {
 }
 
 
-export const addNewPost = async (postDonorSlug) => {
+export const  addNewPost = async (postDonorSlug) => {
     const browser = await puppeteer.launch({
         headless: true,
     });
@@ -124,6 +124,7 @@ export const addNewPost = async (postDonorSlug) => {
     const title = await getPageTitle(page);
     const content = await getMeinInf(page);
 
+    const answer = await sendMessage(title, content);
     // const imgId = await createImg(title)
 
     // let answer;
@@ -139,8 +140,10 @@ export const addNewPost = async (postDonorSlug) => {
 
     await browser.close();
 
-    console.log(title);
-    console.log(content);
+    console.log('title' + title);
+    console.log('content' + content);
+    console.log('-----------------');
+    console.log('answer ' + answer);
     return 1;
 };
 
